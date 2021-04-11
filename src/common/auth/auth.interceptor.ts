@@ -9,6 +9,7 @@ import {
 import { AuthService } from './auth.service';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
+import { ADMIN_PERMISSION } from '../constants';
 
 @Injectable()
 export class AuthInterceptor implements NestInterceptor {
@@ -29,10 +30,17 @@ export class AuthInterceptor implements NestInterceptor {
       return next.handle();
     }
     const request = context.switchToHttp().getRequest();
+    if (!request.get('Authorization')) {
+      throw new UnauthorizedException('Missing authorization ticket');
+    }
     try {
       const user = await this.authService.validateUserToken(
         request.headers.authorization,
       );
+      request.user = user;
+      if (user.permission.id === ADMIN_PERMISSION) {
+        next.handle();
+      }
       if (permission !== user.permissions.id) {
         throw new UnauthorizedException('Permission failed');
       }

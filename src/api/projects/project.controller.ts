@@ -1,25 +1,27 @@
 import {
   Controller,
   Get,
+  Req,
   Res,
   SetMetadata,
   UseInterceptors,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { AuthInterceptor } from 'src/common/auth/auth.interceptor';
-import { AuthorizationInterceptor } from 'src/common/auth/authorization.interceptor';
+import { PUBLIC_PERMISSION } from 'src/common/constants';
 import { ProjectFacade } from './project.facade';
 
-@UseInterceptors(AuthorizationInterceptor)
-@Controller()
+@ApiTags('Projects')
+@Controller('api')
 export class ProjectController {
   constructor(private projectFacade: ProjectFacade) {}
 
   @Get('/projects')
   @UseInterceptors(AuthInterceptor)
-  @SetMetadata('permission', 'bf4e9b86-9a11-111eb-85c7-8c8590749638')
-  async getProjects(@Res() response): Promise<void> {
+  @SetMetadata('permission', PUBLIC_PERMISSION)
+  async getProjects(@Req() request, @Res() response): Promise<void> {
     const projects = await this.projectFacade.getProjectForUser(
-      '0fa9510f-0fd1-4461-926b-a81e5040781b',
+      request.user.id,
     );
     response.json(projects);
   }

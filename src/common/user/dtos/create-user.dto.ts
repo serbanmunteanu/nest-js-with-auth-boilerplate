@@ -34,6 +34,7 @@ export class CreateUserDto {
   @ApiProperty({ required: false })
   isActive: boolean;
 
+  @IsOptional()
   @ApiProperty({ required: false })
   permissions: Permissions;
 }

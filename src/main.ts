@@ -20,7 +20,6 @@ async function bootstrap() {
     .setTitle('Marketing site - Serban Munteanu - REST COMPONENT')
     .setDescription('API Documentation Rest')
     .setVersion('1.0')
-    .addTag('Bomba')
     .build();
 
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerOptions);

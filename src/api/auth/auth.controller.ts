@@ -8,7 +8,7 @@ import { PreLoginDto } from './dtos/pre-login.dto';
 import { LoginInPipe } from './pipes/login.pipe';
 
 @ApiTags('Authentication')
-@Controller()
+@Controller('api')
 export class AuthController {
   constructor(protected authFacade: AuthFacade) {}
 
