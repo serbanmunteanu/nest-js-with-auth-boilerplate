@@ -13,10 +13,10 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ default: null })
   firstName: string;
 
-  @Column()
+  @Column({ default: null })
   lastName: string;
 
   @Column({ nullable: false, unique: true })

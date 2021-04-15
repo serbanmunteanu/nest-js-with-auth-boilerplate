@@ -15,6 +15,9 @@ async function bootstrap() {
   });
 
   app.useGlobalPipes(validationPipe);
+  app.enableCors({
+    origin: '*',
+  });
 
   const swaggerOptions = new DocumentBuilder()
     .setTitle('Marketing site - Serban Munteanu - REST COMPONENT')
@@ -24,6 +27,6 @@ async function bootstrap() {
 
   const swaggerDocument = SwaggerModule.createDocument(app, swaggerOptions);
   SwaggerModule.setup('/docs', app, swaggerDocument);
-  await app.listen(3000);
+  await app.listen(5000);
 }
 bootstrap();

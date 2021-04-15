@@ -9,13 +9,13 @@ import {
 import { Permissions } from 'src/common/permissions/permissions.entity';
 
 export class CreateUserDto {
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ required: false })
+  @IsOptional()
   @IsString()
   firstName: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ required: false })
+  @IsOptional()
   @IsString()
   lastName: string;
 

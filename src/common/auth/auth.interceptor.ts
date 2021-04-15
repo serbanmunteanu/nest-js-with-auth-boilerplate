@@ -38,7 +38,7 @@ export class AuthInterceptor implements NestInterceptor {
         request.headers.authorization,
       );
       request.user = user;
-      if (user.permission.id === ADMIN_PERMISSION) {
+      if (user.permissions.id === ADMIN_PERMISSION) {
         next.handle();
       }
       if (permission !== user.permissions.id) {

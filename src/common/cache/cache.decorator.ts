@@ -1,7 +1,10 @@
 import * as CacheManager from 'cache-manager';
+import * as redisStore from 'cache-manager-redis';
 
 const memoryCache = CacheManager.caching({
-  store: 'memory',
+  store: redisStore,
+  host: 'localhost',
+  port: 6379,
   max: 1000,
   ttl: 300,
 });

@@ -19,6 +19,13 @@ export class UserService {
     });
   }
 
+  async findUserById(userId: string): Promise<User> {
+    return await this.userRepository.findOne({
+      where: { id: userId },
+      relations: ['permissions', 'projects'],
+    });
+  }
+
   async create(user: CreateUserDto): Promise<User> {
     user.permissions = await this.permissionsService.getPermissionsByType(
       'public',

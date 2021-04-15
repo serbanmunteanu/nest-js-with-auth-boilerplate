@@ -10,6 +10,15 @@ export default async (): Promise<unknown> => {
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
     },
+    mail: {
+      user: 'serban.munteanu1211@gmail.com',
+      pass: 'fysw6gf3k',
+      from: 'serban.munteanu1211@gmail.com',
+      queue: {
+        host: 'localhost',
+        port: '6379',
+      },
+    },
   };
   return appConfig;
 };
