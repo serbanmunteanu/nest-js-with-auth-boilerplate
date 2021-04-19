@@ -6,7 +6,6 @@ import {
   Process,
 } from '@nestjs/bull';
 import { Job } from 'bull';
-import { User } from '../user/user.entity';
 import { MailerService } from '@nestjs-modules/mailer';
 
 @Processor('mail-queue')
@@ -58,6 +57,25 @@ export class MailProcessor {
       return result;
     } catch (error) {
       throw error;
+    }
+  }
+
+  @Process('contact-message-confirmation')
+  async sendContactConfirmationEmail(
+    job: Job<{ email: string; name: string }>,
+  ): Promise<any> {
+    try {
+      const result = await this.mailerService.sendMail({
+        template: 'contactMessageConfirmation',
+        context: {
+          name: job.data.name,
+        },
+        subject: `We receive your request and we will come later`,
+        to: job.data.email,
+      });
+      return result;
+    } catch (err) {
+      throw err;
     }
   }
 }

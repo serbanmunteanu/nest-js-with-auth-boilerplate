@@ -22,4 +22,16 @@ export class MailService {
       return false;
     }
   }
+
+  async sendContactMessageConfirmation(
+    email: string,
+    name: string,
+  ): Promise<boolean> {
+    try {
+      await this.mailQueue.add('contact-message-confirmation', { email, name });
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
 }

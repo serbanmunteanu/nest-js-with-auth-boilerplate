@@ -13,7 +13,10 @@ export class ContactFacade {
   async sendMessage(dto: CreateContactMessageDto): Promise<void> {
     try {
       await this.contactService.store(dto);
-      await this.mailService.sendConfirmationEmail(dto.email, dto.name, '200');
+      await this.mailService.sendContactMessageConfirmation(
+        dto.email,
+        dto.name,
+      );
     } catch (err) {
       throw new InternalServerErrorException();
     }
