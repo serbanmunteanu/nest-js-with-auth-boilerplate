@@ -6,6 +6,7 @@ import { AuthModule } from './api/auth/auth.module';
 import { ProjectModule } from './api/projects/project.module';
 import { ContactModule } from './api/contact/contact.module';
 import { UserModule } from './api/user/user.module';
+import { TestModule } from './api/test/test.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { UserModule } from './api/user/user.module';
     ProjectModule,
     ContactModule,
     UserModule,
+    TestModule,
   ],
   controllers: [],
   providers: [],
