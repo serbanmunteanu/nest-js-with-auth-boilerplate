@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { TestCategories } from 'src/common/test/test-category.entity';
+import { Prospects } from 'src/common/test/test-prospects.entity';
 import { TestService } from 'src/common/test/test.service';
+import { CreateSubmissionDto } from './dto/create-submissions.dto';
 
 @Injectable()
 export class TestFacade {
@@ -10,7 +12,7 @@ export class TestFacade {
     return await this.testService.getAllQuestionsForCategory();
   }
 
-  async getResult() {
-    return await this.testService.getResultForProspect(1);
+  async getResult(dto: CreateSubmissionDto): Promise<Prospects> {
+    return await this.testService.storeSubmission(dto);
   }
 }

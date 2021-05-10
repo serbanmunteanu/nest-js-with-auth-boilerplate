@@ -9,7 +9,7 @@ export class Answers {
   @Column()
   data: string;
 
-  @Column({ select: false })
+  @Column()
   isTrue: boolean;
 
   @ManyToOne(() => Question, (question) => question.answers)
