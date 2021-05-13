@@ -9,6 +9,21 @@ const memoryCache = CacheManager.caching({
   ttl: 300,
 });
 
+export function InvalidateCache({ key }: { key: string }) {
+  return (
+    _target: Record<string, any>,
+    _propertyKey: string,
+    descriptor: PropertyDescriptor,
+  ) => {
+    const method = descriptor.value;
+    descriptor.value = async function (...args: any[]) {
+      await memoryCache.del(key);
+      const result = await method.apply(this, args);
+      return result;
+    };
+  };
+}
+
 export function Cache({ key, ttl }: { key: string; ttl: number }) {
   return (
     _target: Record<string, any>,

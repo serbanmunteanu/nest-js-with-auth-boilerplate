@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsEmail, IsString, IsArray } from 'class-validator';
-import { TestAnswersDto } from 'src/common/test/test-answers.dto';
+import { TestAnswersDto } from 'src/common/test/dtos/test-answers.dto';
 
 export class CreateSubmissionDto {
   @ApiProperty()
